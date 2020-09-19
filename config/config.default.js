@@ -11,6 +11,12 @@ module.exports = appInfo => {
    * @type {Egg.EggAppConfig}
    **/
   const config = exports = {};
+  // 关闭CSRF
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
   // 数据库连接配置
   config.sequelize = {
     dialect: 'mysql',
