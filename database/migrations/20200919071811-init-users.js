@@ -12,7 +12,7 @@ module.exports = {
     const { INTEGER, DATE, STRING } = Sequelize;
     await queryInterface.createTable('users', {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true, comment: '主键递增' },
-      name: { type: STRING(30), comment: '用户名' },
+      name: { type: STRING(30), unique: true, comment: '用户名' },
       password: { type: STRING(128), comment: '密码' },
       priority: { type: INTEGER, comment: '不同权限，0为C端用户，1为B端用户，2为P端用户' },
       created_at: DATE,
