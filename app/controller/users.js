@@ -17,8 +17,8 @@ class UserController extends Controller {
   // 注册用户
   async create() {
     const ctx = this.ctx;
-    const { name, password, priority } = ctx.request.body;
-    const user = await ctx.model.User.create({ name, password, priority });
+    const { username, password, groupid } = ctx.request.body;
+    const user = await ctx.model.User.create({ username, password, groupid });
     ctx.status = 201;
     ctx.body = user;
   }

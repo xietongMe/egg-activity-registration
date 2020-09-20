@@ -12,20 +12,11 @@ module.exports = {
     const { INTEGER, DATE, STRING } = Sequelize;
     await queryInterface.createTable('users', {
       id: { type: INTEGER, primaryKey: true, autoIncrement: true, comment: '主键递增' },
-      name: { type: STRING(30), unique: true, comment: '用户名' },
+      username: { type: STRING(30), unique: true, comment: '用户名' },
       password: { type: STRING(128), comment: '密码' },
-      priority: { type: INTEGER, comment: '不同权限，0为C端用户，1为B端用户，2为P端用户' },
+      groupid: { type: INTEGER(2), comment: '不同权限，0为C端用户，1为B端用户，2为P端用户' },
       created_at: DATE,
       updated_at: DATE,
     });
   },
-
-  down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
-  }
 };
