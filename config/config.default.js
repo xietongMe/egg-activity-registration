@@ -17,6 +17,10 @@ module.exports = appInfo => {
       enable: false,
     },
   };
+  // jwt secret 设置
+  config.jwt = {
+    secret: '123456',
+  };
   // 数据库连接配置
   config.sequelize = {
     dialect: 'mysql',
