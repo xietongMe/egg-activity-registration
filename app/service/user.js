@@ -19,6 +19,11 @@ class UserService extends Service {
     const isValid = (user[0].password === password);
     return isValid;
   }
+  /**
+   * @method getUserInfo
+   * @param {username}
+   * @return {user}  返回用户信息
+   */
   async getUserInfo(username) {
     const user = await this.ctx.model.User.findAll({
       where: {

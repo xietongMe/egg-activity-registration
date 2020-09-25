@@ -10,4 +10,6 @@ module.exports = app => {
   router.post('register', '/users/register', controller.users.register); // 注册用户
   router.get('login', '/users/login', controller.users.login); // 登录
   router.get('users', '/users/:id', controller.users.show);
+
+  router.post('activity', '/activity', app.jwt, controller.activity.createActivity); // 注册用户
 };

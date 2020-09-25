@@ -24,17 +24,17 @@ module.exports = app => {
         }, app.config.jwt.secret);
         ctx.status = 201;
         ctx.body = {
+          code: 0,
           message: '登录成功',
           data: {
             token,
           },
-          code: 0,
         };
       } else {
         ctx.body = {
+          code: -1,
           message: '密码错误',
           data: {},
-          code: -1,
         };
       }
     }
