@@ -24,8 +24,9 @@ module.exports = {
       content: { type: STRING(255), comment: '活动内容' },
       max_number: { type: INTEGER, comment: '最大人数' },
       current_number: { type: INTEGER, defaultValue: 0, comment: '当前报名人数' },
-      created_at: DATE,
-      updated_at: DATE,
+      weight: { type: INTEGER, defaultValue: 0, comment: '权值' },
+      created_at: { type: DATE, comment: '创建时间' },
+      updated_at: { type: DATE, comment: '更新时间' },
     });
   },
 };

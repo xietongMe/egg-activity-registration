@@ -28,8 +28,8 @@ class ActivityController extends Controller {
   async updateActivity() {
     const ctx = this.ctx;
     if (ctx.state.user.groupid === 1) {
-      const { id, title, created_user_name, registration_start_at, registration_end_at, start_at, end_at, sign_start_at, sign_end_at, sign_method, address, content, max_number } = ctx.request.body;
-      const activity = await ctx.service.activity.updateActivity(id, title, created_user_name, registration_start_at, registration_end_at, start_at, end_at, sign_start_at, sign_end_at, sign_method, address, content, max_number);
+      const { id, title, created_user_name, registration_start_at, registration_end_at, start_at, end_at, sign_start_at, sign_end_at, sign_method, address, content, max_number, weight } = ctx.request.body;
+      const activity = await ctx.service.activity.updateActivity(id, title, created_user_name, registration_start_at, registration_end_at, start_at, end_at, sign_start_at, sign_end_at, sign_method, address, content, max_number, weight);
       ctx.body = {
         code: 0,
         message: '活动更新成功',
@@ -42,6 +42,17 @@ class ActivityController extends Controller {
         data: {},
       };
     }
+  }
+
+  // 获取活动列表或者详细信息
+  async getAllActivityList() {
+    const ctx = this.ctx;
+    const activity = await ctx.service.activity.getAllActivityList();
+    ctx.body = {
+      code: 0,
+      message: '活动获取成功',
+      data: { activity },
+    };
   }
 }
 

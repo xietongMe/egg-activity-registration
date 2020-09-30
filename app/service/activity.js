@@ -17,11 +17,22 @@ class ActivityService extends Service {
     return activity;
   }
 
-  async updateActivity(id, title, created_user_name, registration_start_at, registration_end_at, start_at, end_at, sign_start_at, sign_end_at, sign_method, address, content, max_number) {
+  async updateActivity(id, title, created_user_name, registration_start_at, registration_end_at, start_at, end_at, sign_start_at, sign_end_at, sign_method, address, content, max_number, weight) {
     const activity = await this.ctx.model.Activity.findByPk(id);
     await activity.update({
-      title, created_user_name, registration_start_at, registration_end_at, start_at, end_at, sign_start_at, sign_end_at, sign_method, address, content, max_number,
+      title, created_user_name, registration_start_at, registration_end_at, start_at, end_at, sign_start_at, sign_end_at, sign_method, address, content, max_number, weight,
     });
+    return activity;
+  }
+
+  async getAllActivityList() {
+    const activity = await this.ctx.model.Activity.findAll({
+      order: [
+        [ 'weight', 'DESC' ],
+        [ 'updated_at', 'DESC' ],
+      ],
+    }
+    );
     return activity;
   }
 }
