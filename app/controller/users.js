@@ -12,8 +12,9 @@ module.exports = app => {
     // 用户登录
     async login() {
       const ctx = this.ctx;
-      const username = ctx.get('username');
-      const password = ctx.get('password');
+      // const username = ctx.get('username');
+      // const password = ctx.get('password');
+      const { username, password } = ctx.request.body;
       const isValid = await ctx.service.user.passwordIsValid(username, password);
       if (isValid) {
         const userInfo = await ctx.service.user.getUserInfo(username);
@@ -50,7 +51,13 @@ module.exports = app => {
       const { username, password, groupid } = ctx.request.body;
       const user = await ctx.model.User.create({ username, password, groupid });
       ctx.status = 201;
-      ctx.body = user;
+      ctx.body = {
+        code: 0,
+        message: '注册成功',
+        data: {
+          user,
+        },
+      };
     }
 
   }

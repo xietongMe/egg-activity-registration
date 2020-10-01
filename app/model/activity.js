@@ -7,6 +7,7 @@ module.exports = app => {
     id: { type: INTEGER, primaryKey: true, autoIncrement: true, comment: '主键递增' },
     title: { type: STRING(30), unique: true, comment: '活动名称' },
     created_user_name: { type: STRING(30), comment: '发布者' },
+    created_user_id: { type: INTEGER, comment: '发布者id' },
     registration_start_at: { type: DATE, comment: '报名开始时间' },
     registration_end_at: { type: DATE, comment: '报名结束时间' },
     start_at: { type: DATE, comment: '活动开始时间' },

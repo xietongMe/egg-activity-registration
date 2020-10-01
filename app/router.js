@@ -13,5 +13,5 @@ module.exports = app => {
 
   router.post('activity', '/activity', app.jwt, controller.activity.createActivity); // 创建活动
   router.put('activity', '/activity', app.jwt, controller.activity.updateActivity); // 更新活动
-  router.get('activity', '/activity', app.jwt, controller.activity.getAllActivityList); // 获取活动列表
+  router.get('activity', '/activity', app.jwt, controller.activity.getActivityList); // 获取活动列表
 };
