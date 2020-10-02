@@ -64,7 +64,26 @@ class ActivityController extends Controller {
         data: { activity },
       };
     }
+  }
 
+  // 置顶活动
+  async topActivity() {
+    const ctx = this.ctx;
+    if (ctx.state.user.groupid === 2) {
+      const { id } = ctx.request.body;
+      const activity = await ctx.service.activity.topActivity(id);
+      ctx.body = {
+        code: 0,
+        message: '活动置顶成功',
+        data: { activity },
+      };
+    } else {
+      ctx.body = {
+        code: -1,
+        message: '置顶失败，权限不足',
+        data: {},
+      };
+    }
   }
 }
 

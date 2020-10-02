@@ -24,6 +24,14 @@ class ActivityService extends Service {
     });
     return activity;
   }
+  // 置顶活动
+  async topActivity(id) {
+    const activity = await this.ctx.model.Activity.findByPk(id);
+    await activity.update({
+      weight: 1,
+    });
+    return activity;
+  }
 
   async getAllActivityList() {
     const activity = await this.ctx.model.Activity.findAll({
