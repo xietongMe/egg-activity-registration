@@ -70,8 +70,8 @@ class ActivityController extends Controller {
   async topActivity() {
     const ctx = this.ctx;
     if (ctx.state.user.groupid === 2) {
-      const { id } = ctx.request.body;
-      const activity = await ctx.service.activity.topActivity(id);
+      const { activity_id } = ctx.request.body;
+      const activity = await ctx.service.activity.topActivity(activity_id);
       ctx.body = {
         code: 0,
         message: '活动置顶成功',
@@ -81,6 +81,25 @@ class ActivityController extends Controller {
       ctx.body = {
         code: -1,
         message: '置顶失败，权限不足',
+        data: {},
+      };
+    }
+  }
+  // 活动签到
+  async signActivity() {
+    const ctx = this.ctx;
+    const { activity_id, user_id } = ctx.request.body;
+    if (ctx.state.user.groupid === 1) {
+      const activity = await ctx.service.activity.signActivity(activity_id, user_id);
+      ctx.body = {
+        code: 0,
+        message: '活动签到成功',
+        data: { activity },
+      };
+    } else {
+      ctx.body = {
+        code: -1,
+        message: '签到失败，权限不足',
         data: {},
       };
     }

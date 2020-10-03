@@ -2,7 +2,11 @@
 // app/service/news.js
 
 const Service = require('egg').Service;
-
+function toInt(str) {
+  if (typeof str === 'number') return str;
+  if (!str) return str;
+  return parseInt(str, 10) || 0;
+}
 class ActivityService extends Service {
   /**
      * @function creatActivity
@@ -25,12 +29,48 @@ class ActivityService extends Service {
     return activity;
   }
   // 置顶活动
-  async topActivity(id) {
-    const activity = await this.ctx.model.Activity.findByPk(id);
+  async topActivity(activity_id) {
+    const activity = await this.ctx.model.Activity.findByPk(activity_id);
     await activity.update({
       weight: 1,
     });
     return activity;
+  }
+  // 活动签到
+  async signActivity(activity_id, user_id) {
+    try {
+      await this.ctx.model.transaction(async t => {
+        const sign = await this.ctx.model.Sign.create({
+          activity_id, user_id,
+        }, { transaction: t });
+        const activity = await this.ctx.model.Activity.findByPk(activity_id);
+        console.log(activity.sign_number);
+        const sign_number = toInt(activity.sign_number) + 1;
+        await activity.update({
+          sign_number,
+        }, { transaction: t });
+        const enroll = await this.ctx.model.Enrollment.findOne({
+          where: {
+            activity_id,
+            user_id,
+          },
+        });
+        await enroll.update({
+          sign: 1,
+        });
+        return sign;
+      });
+    } catch (error) {
+      console.log('\n' + 12345 + error);
+      // 如果执行到此,则发生错误.
+      // 该事务已由 Sequelize 自动回滚！
+    }
+    //
+    // const activity = await this.ctx.model.Activity.findByPk(id);
+    // await activity.update({
+    //   weight: 1,
+    // });
+    // return activity;
   }
 
   async getAllActivityList() {

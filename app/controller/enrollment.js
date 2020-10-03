@@ -6,7 +6,6 @@ class EnrollmentController extends Controller {
   // 活动报名
   async createEnrollmentRecord() {
     const ctx = this.ctx;
-    console.log(ctx.state.user.groupid);
     if (ctx.state.user.groupid === 0) {
       const { activity_id } = ctx.request.body;
       const user_id = ctx.state.user.id;

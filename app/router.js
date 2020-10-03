@@ -15,6 +15,7 @@ module.exports = app => {
   router.put('activity', '/activity', app.jwt, controller.activity.updateActivity); // 更新活动
   router.get('activity', '/activity', app.jwt, controller.activity.getActivityList); // 获取活动列表
   router.put('activity', '/activity/top', app.jwt, controller.activity.topActivity); // 置顶活动
+  router.post('activity', '/activity/sign', app.jwt, controller.activity.signActivity); // 活动签到
 
   router.post('enrollment', '/enrollment', app.jwt, controller.enrollment.createEnrollmentRecord); // 活动报名
   router.get('enrollment', '/enrollment', app.jwt, controller.enrollment.getEnrollmentRecord); // 获取用户活动报名信息
