@@ -1,5 +1,8 @@
+
 # egg-activity-registration
 
+### project description
+This is just a practice project based on Egg.js
 
 
 ## QuickStart
@@ -31,3 +34,4 @@ $ npm stop
 
 
 [egg]: https://eggjs.org
+
